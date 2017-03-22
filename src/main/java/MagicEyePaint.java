@@ -9,6 +9,7 @@ public class MagicEyePaint extends PApplet {
     private static final int PATTERN_WIDTH = (int) ((DRAW_AREA_SIZE * 1.2) / (PATTERN_REPEAT_TIMES - 1));
 
     private int[][] pattern;
+    private long startTime;
 
     @Override
     public void settings() {
@@ -19,6 +20,7 @@ public class MagicEyePaint extends PApplet {
     public void setup() {
         pattern = getRandomRGBPattern(DRAW_AREA_SIZE, PATTERN_WIDTH);
         background(0);
+        startTime = System.currentTimeMillis();
     }
 
     private int[][] getRandomRGBPattern(int height, int width) {
@@ -40,7 +42,7 @@ public class MagicEyePaint extends PApplet {
         }
 
         loadPixels();
-        //drawSineWaveInDrawArea();
+        drawSineWaveInDrawArea();
         drawPattern();
         extendPattern();
         updatePixels();
@@ -49,9 +51,12 @@ public class MagicEyePaint extends PApplet {
     private void drawSineWaveInDrawArea() {
         float centerX, centerY;
         centerX = centerY = DRAW_AREA_SIZE / 2;
+        float shift = (System.currentTimeMillis() - startTime )/ 100f;
+        System.out.println(System.currentTimeMillis());
+        System.out.println(shift);
         for (int row = 0; row < DRAW_AREA_SIZE; row++) {
             for (int col = 0; col < DRAW_AREA_SIZE; col++) {
-                pixels[row * width + col] = color(map(sin(dist(row, col, centerY, centerX) / 10f), -1, 1, 0, 255));
+                pixels[row * width + col] = color(map(sin(dist(row, col, centerY, centerX) / 10f + shift), -1, 1, 0, 255));
             }
         }
     }

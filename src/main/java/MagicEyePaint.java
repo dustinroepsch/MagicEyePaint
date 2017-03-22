@@ -63,9 +63,9 @@ public class MagicEyePaint extends PApplet {
                 if (drawAreaX < DRAW_AREA_SIZE) {
                     //  System.out.println("happening");
                     int color = pixels[y * width + drawAreaX];
-                    int offset = (int) map(color, color(0), color(255), 10, 0);
+                    int offset = (int) map(color, color(0), color(255), 0, 10);
 
-                    pixels[y * width + x] = pixels[y * width + x - offset - PATTERN_WIDTH];
+                    pixels[y * width + x] = pixels[y * width + x + offset - PATTERN_WIDTH];
                     //      System.out.println(offset);
 
                 } else {
@@ -82,7 +82,7 @@ public class MagicEyePaint extends PApplet {
                 int pixelsRow = patternRow;
                 int pixelsCol = patternCol + DRAW_AREA_SIZE;
                 pixels[pixelsRow * width + pixelsCol] = pattern[patternRow][patternCol];
-                pixels[pixelsRow * width + pixelsCol + PATTERN_WIDTH] = pattern[patternRow][patternCol];
+                pixels[pixelsRow * width + pixelsCol + PATTERN_WIDTH ] = pattern[patternRow][patternCol];
 
             }
         }

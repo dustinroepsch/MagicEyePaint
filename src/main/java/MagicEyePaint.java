@@ -4,9 +4,9 @@ import processing.core.PApplet;
  * Created by dusti on 3/22/2017.
  */
 public class MagicEyePaint extends PApplet {
-    public static final int DRAW_AREA_SIZE = 500;
-    public static final int PATTERN_REPEAT_TIMES = 6;
-    public static final int PATTERN_WIDTH = (int) ((DRAW_AREA_SIZE * 1.2) / (PATTERN_REPEAT_TIMES - 1));
+    private static final int DRAW_AREA_SIZE = 500;
+    private static final int PATTERN_REPEAT_TIMES = 6;
+    private static final int PATTERN_WIDTH = (int) ((DRAW_AREA_SIZE * 1.2) / (PATTERN_REPEAT_TIMES - 1));
 
     private int[][] pattern;
 
@@ -55,20 +55,21 @@ public class MagicEyePaint extends PApplet {
             }
         }
     }
+
     private void extendPattern() {
         int drawAreaX = 0;
         for (int x = DRAW_AREA_SIZE + 2 * PATTERN_WIDTH; x < width; x++) {
             for (int y = 0; y < DRAW_AREA_SIZE; y++) {
                 if (drawAreaX < DRAW_AREA_SIZE) {
-                  //  System.out.println("happening");
+                    //  System.out.println("happening");
                     int color = pixels[y * width + drawAreaX];
                     int offset = (int) map(color, color(0), color(255), 10, 0);
 
-                    pixels[y  * width + x] = pixels[y  * width + x - offset - PATTERN_WIDTH];
-              //      System.out.println(offset);
+                    pixels[y * width + x] = pixels[y * width + x - offset - PATTERN_WIDTH];
+                    //      System.out.println(offset);
 
                 } else {
-                    pixels[y  * width + x] = pixels[y  * width + x - PATTERN_WIDTH];
+                    pixels[y * width + x] = pixels[y * width + x - PATTERN_WIDTH];
                 }
             }
             drawAreaX++;
